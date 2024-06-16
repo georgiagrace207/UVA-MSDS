@@ -1,0 +1,67 @@
+---
+title: "badge"
+output: html_document
+date: "2024-06-16"
+---
+
+```{r}
+
+# Problem 1
+
+sequence <- 1:1000
+
+multiples <- sequence[sequence %% 3 == 0 | sequence %% 5 == 0]
+
+multiples_sum <- sum(multiples)
+
+print(multiples_sum)
+
+# Problem 2
+
+fibonacci_sum <- 0
+a <- 1
+b <- 2
+
+while (a <= 4000000) {
+  if (a %% 2 == 0) {
+    fibonacci_sum <- fibonacci_sum + a
+  }
+  next_number <- a + b
+  a <- b
+  b <- next_number
+}
+
+print(fibonacci_sum)
+
+# Problem 3
+
+largest_factor <- function(n) {
+  largest <- 0
+  a <- 2
+  while (n %% a == 0) {
+    largest <- a
+    n <- n / a
+  }
+  a <- 3
+  while (a <= sqrt(n)) {
+    while (n %% a == 0) {
+      largest <- a
+      n <- n / a
+    }
+    a <- a + 2  
+  }
+  if (n > 2) {
+    largest <- n
+  }
+  return(largest)
+}
+
+number <- 600851475143
+
+answer <- largest_factor(number)
+print(answer)
+
+    
+```
+
+
