@@ -1,0 +1,64 @@
+---
+title: "badgept3"
+output: html_document
+date: "2024-06-16"
+---
+
+```{r}
+
+# Install packages
+
+install.packages("ggplot2")
+install.packages("dplyr")
+library(ggplot2)
+library(dplyr)
+
+```
+
+```{r}
+
+# Generating random data
+
+values <- c(10, 30, 50, 100, 500)  
+p <- 0.5   
+mean <- values * p  
+sd <- sqrt(values * p * (1 - p))  
+
+
+distribution_data <- function(n, p) {
+  b_data <- rbinom(1000, size = n, prob = p)
+  n_data <- rnorm(1000, mean = n * p, sd = sqrt(n * p * (1 - p)))
+  
+  data.frame(
+    x = c(b_data, n_data),
+    distribution = rep(c(paste("Binomial (n =", n, ")"), paste("Normal (n =", n, ")")), each = 1000)
+  )
+}
+
+data <- lapply(values, function(n) 
+  distribution_data(n, p)) %>%
+  bind_rows() 
+
+```
+
+
+
+```{r}
+
+# Create histogram
+
+ggplot(data, aes(x = x, fill = distribution)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30) +
+  facet_wrap(~ distribution, scales = "free") +
+  theme_minimal() +
+  labs(title = "Convergence of Binomial to Normal Distribution",
+       x = "Value", y = "Frequency",
+       fill = "Distribution")
+
+```
+
+
+
+
+```
+
