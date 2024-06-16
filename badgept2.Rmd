@@ -1,0 +1,58 @@
+---
+title: "badgept2"
+output: html_document
+date: "2024-06-16"
+---
+
+```{r}
+# Install packages
+
+install.packages("ggplot2")
+install.packages("dplyr")
+library(ggplot2)
+library(dplyr)
+
+```
+
+```{r}
+# Generating and creating data for binomial, normal, and uniform data:
+
+n <- 1000  
+p <- 0.5   
+mean <- 0  
+sd <- 1    
+min_val <- 0  
+max_val <- 1  
+
+b_data <- rbinom(n, size = 10, prob = p)
+n_data <- rnorm(n, mean = mean, sd = sd)
+u_data <- runif(n, min = min_val, max = max_val)
+
+b_df <- data.frame(x = b_data, distribution = "Binomial")
+n_df <- data.frame(x = n_data, distribution = "Normal")
+u_df <- data.frame(x = u_data, distribution = "Uniform")
+
+data <- bind_rows(b_df, n_df, u_df)
+
+```
+
+```{r}
+# Creating histograms
+
+# Plot histograms
+ggplot(data, aes(x = x, fill = distribution)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30) +
+  facet_wrap(~ distribution, scales = "free") +
+  theme_minimal() +
+  labs(title = "Histograms of Random Distributions",
+       x = "Value", y = "Frequency",
+       fill = "Distribution")
+
+```
+
+
+
+
+
+
+
