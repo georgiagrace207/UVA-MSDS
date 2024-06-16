@@ -1,0 +1,71 @@
+---
+title: "badgept4"
+output: html_document
+date: "2024-06-16"
+---
+
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+library(tidyverse)
+library(readr)
+install.packages("readxl")
+library(readxl)
+```
+
+
+```{r}
+
+data <- read_excel("C:/Users/Georgia Davidson/Downloads/MSDS-Orientation-Computer-Survey.xlsx")
+
+library(readxl)
+MSDS_Orientation_Computer_Survey <- read_excel("MSDS-Orientation-Computer-Survey.xlsx")
+View(MSDS_Orientation_Computer_Survey)
+```
+
+
+```{r}
+
+
+# Creating histograms
+
+ggplot(data, aes(x = `RAM (in GB)`)) +
+  geom_histogram(binwidth = 5, fill = "green", color = "grey", alpha = 0.8) +
+  labs(title = "RAM Distribution among MSDS students",
+       x = "RAM (GB)",
+       y = "Frequency") +
+  theme_minimal()
+
+ggplot(data, aes(x = `CPU Cycle Rate (in GHz)`)) +
+  geom_histogram(binwidth = 5, fill = "green", color = "grey", alpha = 0.8) +
+  labs(title = "CPU Cycle Rate among MSDS students",
+       x = "Rate",
+       y = "Frequency") +
+  theme_minimal()
+
+ggplot(data, aes(x = `CPU Number of Cores (int)`)) +
+  geom_histogram(binwidth = 5, fill = "green", color = "grey", alpha = 0.8) +
+  labs(title = "Cores Number among MSDS students",
+       x = "Cores",
+       y = "Frequency") +
+  theme_minimal()
+```
+```{r}
+# Qualitative descriptions:
+
+# Students had a mix of MacOS, Windows, and Linux operating systems. 
+
+# Hard drives ranged from 16 to over 4000. 
+
+# CUDA cores ranged from 0 to over 6000. 
+
+# There were a broad range of GPU strings students had. 
+
+```
+
+
+```
+
+
+
